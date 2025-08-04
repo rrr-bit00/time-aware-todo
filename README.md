@@ -78,7 +78,7 @@ docker compose down
 ```
 
 ## 🗺️ER図
-**後日追加予定**
+![ER図](./docs/er-diagram.png)
 
 
 ## テスト方法
