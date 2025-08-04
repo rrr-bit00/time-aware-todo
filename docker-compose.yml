@@ -1,0 +1,42 @@
+services:
+  frontend:
+    container_name: react-app
+    build:
+      context: "./frontend"
+      dockerfile: "Dockerfile"
+    ports:
+      - 3001:3000
+    volumes:
+    # コードの同期
+     - ./frontend:/front_app
+    # node_modulesの保存先を用意し、マウントする
+     - node_modules_copy:/front_app/node_modules
+
+  backend:
+    container_name: fastapi-app
+    build:
+      context: "./backend"
+      dockerfile: "Dockerfile"
+    ports:
+      - 8001:8001
+    volumes:
+      - ./backend:/back_app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    container_name: postgres-db
+    ports:
+      - 5433:5432
+    # データベースの永続化
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+volumes:
+  node_modules_copy:
+  db-data:

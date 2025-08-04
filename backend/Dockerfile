@@ -1,0 +1,14 @@
+FROM python:3.11-slim
+
+WORKDIR /back_app
+
+COPY requirements.txt ./
+RUN apt-get update && apt-get upgrade -y && \
+	pip install --no-cache-dir -r requirements.txt && \
+	rm -rf /var/lib/apt/lists/*
+
+COPY . .
+
+EXPOSE 8001
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
