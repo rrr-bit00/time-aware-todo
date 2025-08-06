@@ -9,4 +9,4 @@ class User(Base):
     id = Column(Integer, primary_key = True, index = True)
     username = Column(String, nullable = False)
     email = Column(String, unique = True, index = True, nullable = False)
-    hash_pass = Column(String, nullable = Falses)
+    hash_pass = Column(String, nullable = False)

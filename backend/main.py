@@ -6,7 +6,7 @@ from router import users
 app = FastAPI()
 
 # dbのテーブルを作成
-Base.metadata.create=all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 # usersルーターをappに登録
 app.include_router(users.router)
