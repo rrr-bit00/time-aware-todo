@@ -1,7 +1,12 @@
 from fastapi import FastAPI
+from models.users import Base
+from db.session import engine
+from router import users
 
 app = FastAPI()
 
-@app.get("/")
-def root_test():
-    return {"message":"testDESU"}
+# dbのテーブルを作成
+Base.metadata.create=all(bind=engine)
+
+# usersルーターをappに登録
+app.include_router(users.router)
