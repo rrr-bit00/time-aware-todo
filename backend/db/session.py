@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 # 使用できるようにos.getenvで呼び出す
-POSTGRESQL_USER = os.getenv("POSTGRES_USER")
+POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 POSTGRES_DB = os.getenv("POSTGRES_DB")
 # .envにHOSTとPORTを記述していないため、デフォルト値を設定
@@ -16,10 +16,13 @@ POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
 # dbの接続URL
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@db:5432/mydb"
+SQLALCHEMY_DATABASE_URL = (
+    f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}"
+    f"@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    )
 
 # dbエンジンの生成
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo = True)
 
 # セッションクラスの作成（autocommitやautoflushの設定）
-SessionLocal = sessionmaker(autocommit = False, autocommit = False, bind = engine)
+SessionLocal = sessionmaker(autocommit = False, autoflush = False, bind = engine)
