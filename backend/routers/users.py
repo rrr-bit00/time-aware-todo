@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, Depends
+from typing import List
+
 from sqlalchemy.orm import Session
 from schemas.user import UserCreate, UserRead
 from models.user import User
-from typing import List
+from utils.security import hash_password
 
 router = APIRouter()
 
@@ -13,10 +15,18 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Uniqueフィールド（email）の重複を確認
     existng = db.query(User).filter(User.email == user.email).first()
     if existng:
-        raize HTTPException(status = 400, detail = "このEmailはすでに登録されています")
+        raise HTTPException(status = 400, detail = "このEmailはすでに登録されています")
+
+    # 入力されたパスワードをハッシュ化
+    hashed_pass = hash_password(user.password)
 
     # 入力された辞書型の値を展開してdb_userに代入
-    db_user = models.User(**user.dict())    # ** で辞書を展開
+    db_user = models.User(
+        username = user.username,
+        email = user.email,
+        password = hashed_pass
+    )
+
     db.add(db_user)                         # 作成したレコードを追加
     db.commit()                             # dbに変更を保存
     db.refresh(db_user)                     # 保存後に、idなどが自動生成されるため再読み込み
