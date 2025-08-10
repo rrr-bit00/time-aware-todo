@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from schemas.user import UserCreate, UserRead
 from models.user import User
-from utils.security.py import hash_password
+from utils.security import hash_password
 
 router = APIRouter()
 
@@ -15,7 +15,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Uniqueフィールド（email）の重複を確認
     existng = db.query(User).filter(User.email == user.email).first()
     if existng:
-        raize HTTPException(status = 400, detail = "このEmailはすでに登録されています")
+        raise HTTPException(status = 400, detail = "このEmailはすでに登録されています")
 
     # 入力されたパスワードをハッシュ化
     hashed_pass = hash_password(user.password)
