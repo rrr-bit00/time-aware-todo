@@ -7,7 +7,7 @@ class UserBase(BaseModel):
 
 # アカウント作成時のフィールドを定義
 class UserCreate(UserBase):
-    hash_pass: str
+    password: str
 
 # 読み込む際の、フィールドを定義
 class UserRead(UserBase):
