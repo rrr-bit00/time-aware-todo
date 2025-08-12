@@ -12,8 +12,8 @@ oauth2_schemas = OAuth2PasswordBearer(tokenUrl = "auth/login")
 
 # JWT認証が失敗したとき用の例外処理を記述
 credentials_exception = HTTPException(
-    status_code = .HTTP_401_UNAUTHORIZED,
-    detail = "認証情報が無効です"
+    status_code = status.HTTP_401_UNAUTHORIZED,
+    detail = "認証情報が無効です",
     headers = {"WWW-Authenticate": "Bearer"}
 )
 
