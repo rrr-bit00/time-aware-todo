@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from schemas.user import UserCreate, UserRead
 from models.user import User
-from db.dependencies import get_db
+from db.deps import get_db
 from utils.security import hash_password
 
 router = APIRouter()
