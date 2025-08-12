@@ -5,12 +5,14 @@ from sqlalchemy.orm import Session
 from schemas.user import UserCreate, UserRead
 from models.user import User
 from db.deps import get_db
-from utils.security import hash_password
+from core.security import hash_password
+from core.deps import get_current_user
 
-router = APIRouter()
+router = APIRouter(prefix = "/users",
+            tags = ["users"])
 
 # ユーザー登録用エンドポイント
-@router.post("/users", response_model = UserRead)
+@router.post("/", response_model = UserRead)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
     # Uniqueフィールド（email）の重複を確認
@@ -33,5 +35,6 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(db_user)                     # 保存後に、idなどが自動生成されるため再読み込み
     return db_user                          # 完了後、クライアントサイドに情報を返す
 
-
-
+@router.get("/me", response_model = UserRead)
+def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
