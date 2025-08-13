@@ -3,9 +3,9 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from schemas.auth import UserLogin
-from models.user import User
-from db.deps import get_db
-from utils.security import hash_password, verify_password
+from models.users import User
+from db.db_deps import get_db
+from core.security import hash_password, verify_password, create_access_token
 
 router = APIRouter(prefix = "/auth",
             tags = ["auth"])
