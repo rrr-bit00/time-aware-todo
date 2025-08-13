@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from models.users import Base
 from db.session import engine
-from router import users
+from routers import users
 
 app = FastAPI()
 

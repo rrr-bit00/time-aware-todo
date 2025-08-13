@@ -2,9 +2,9 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 from sqlalchemy.orm import Session
 
-from schemas.user import UserCreate, UserRead
-from models.user import User
-from db.deps import get_db
+from schemas.users import UserCreate, UserRead
+from models.users import User
+from db.db_deps import get_db
 from core.security import hash_password
 from core.deps import get_current_user
 
