@@ -14,10 +14,10 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest', // 'latest' に統一
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion: 'latest',
+        // parserOptions.ecmaVersion は languageOptions.ecmaVersion が設定されている場合、冗長になるため削除
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },

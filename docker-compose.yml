@@ -10,7 +10,7 @@ services:
     # コードの同期
      - ./frontend:/front_app
     # node_modulesの保存先を用意し、マウントする
-    # - node_modules_copy:/front_app/node_modules
+     - node_modules_copy:/front_app/node_modules
 
   backend:
     container_name: fastapi-app
