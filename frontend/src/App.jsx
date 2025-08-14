@@ -16,6 +16,18 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
+      {/* Tailwind テスト用の追加 */}
+      <div className="mt-6 p-4 bg-gray-50 rounded-xl shadow">
+        <h2 className="text-3xl font-bold text-blue-600">
+          Tailwind OK
+        </h2>
+        <p className="text-gray-700 mt-2">
+          この文字が青色で背景が薄いグレーなら成功
+        </p>
+      </div>
+      {/* ここまで */}
+
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
