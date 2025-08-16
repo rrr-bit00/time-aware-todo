@@ -1,6 +1,6 @@
 # db接続や認証の関数を自動でFastAPIに渡すファイル
 from sqlalchemy.orm import Session
-from session import SessionLocal
+from db.session import SessionLocal
 
 def get_db() -> Session:
     # dbと接続させる
