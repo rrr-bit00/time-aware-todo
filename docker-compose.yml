@@ -25,9 +25,9 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - db:
+      db:
        # dbの初期化が完了してから雪像するために必要
-          condition: service_healthy
+        condition: service_healthy
 
   db:
     image: postgres:17
