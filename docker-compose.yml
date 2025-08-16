@@ -21,8 +21,13 @@ services:
       - 8001:8001
     volumes:
       - ./backend:/back_app
+    # rootの.envをbackendコンテナにも渡す
+    env_file:
+      - ./.env
     depends_on:
-      - db
+      - db:
+       # dbの初期化が完了してから雪像するために必要
+          condition: service_healthy
 
   db:
     image: postgres:17
@@ -36,6 +41,13 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    # dbに接続可能になったか確認する
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} -p 5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 volumes:
   node_modules_copy:
