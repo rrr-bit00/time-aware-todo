@@ -17,11 +17,11 @@ export default function Layout() {
     <div className="min-h-screen bg-gray-50">
       <header className="border-b bg-white">
         <nav className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-2">
-          <span className="text-lg font-bold mr-3">job-event-hub</span>
-          <Item to="/events">Events</Item>
+          <span className="text-lg font-bold mr-3"><Link to="/" aria-label="Go to Dashboard">Timoa</Link></span>
+          <Item to="/events">イベント</Item>
           <div className="ml-auto flex gap-2">
-            <Item to="/login">Login</Item>
-            <Item to="/register">Register</Item>
+            <Item to="/login">ログイン</Item>
+            <Item to="/register">登録</Item>
           </div>
         </nav>
       </header>
