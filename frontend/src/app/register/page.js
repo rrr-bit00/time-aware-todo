@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 export default function RegisterPage() {
@@ -8,7 +10,7 @@ export default function RegisterPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // 後でAPI接続に差し替え
+    // TODO: 後でAPI接続に差し替え
     setMsg(`登録送信: ${form.username} (${form.email})`);
   };
 
