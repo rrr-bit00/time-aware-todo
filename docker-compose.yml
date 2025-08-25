@@ -1,11 +1,11 @@
 services:
   frontend:
-    container_name: react-app
+    container_name: next-app
     build:
       context: "./frontend"
       dockerfile: "Dockerfile"
     ports:
-      - 5173:5173
+      - 3001:3000
     volumes:
     # コードの同期
      - ./frontend:/front_app
