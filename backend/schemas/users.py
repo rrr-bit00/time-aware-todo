@@ -19,7 +19,7 @@ class UserCreate(UserBase):
 class UserRegister(SQLModel):
     username: str | None = Field(default=None, max_length=255)
     email: EmailStr = Field(max_length=255)
-    password: str = Field(min_length=8, max_length=29)
+    password: str = Field(min_length=8, max_length=20)
 
 
 # emailかpasswordの更新
