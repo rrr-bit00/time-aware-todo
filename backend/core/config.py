@@ -35,13 +35,17 @@ class Settings(BaseSettings):
     # APIのバージョン1のパス
     API_V1_STR: str = "/api/v1"
     # jwtなどに使用するランダムな文字列の生成
+    # 本番時は環境変数などの隠れた場所で定義
     SECRET_KEY: str = secrets.token_urlsafe(32)
     # トークンの有効時間を分単位で設定
-    ACCESS_TOKEN_EXPINE_MINUTES: int = 60 * 24 * 8
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     # CORS用のフロントエンドのURLを設定
     FRONTEND_HOST: str = "http://localhost:5173"
     # 開発、テスト、本番用に環境を分ける値を作成
     ENVIRONMENT: Literal["local", "starting", "production"] = "local"
+
+    # 認証に使用するアルゴリズムを定義
+    ALGORITHM = "HS256"
 
     # CORSがlist[AnyUrl]かstrかチェック
     BACKEND_CORS_ORIGINS: Annotated[

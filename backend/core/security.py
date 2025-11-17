@@ -3,11 +3,9 @@ from typing import Any
 from jose import jwt
 from passlib.context import CryptContext
 
-from config import setting
+from core.config import setting
 
 pass_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-ALGORITHM = "HS256"
 
 
 # 生パスワードをハッシュ化
@@ -28,5 +26,5 @@ def create_access_token(
     # 現在時刻（UTC）から分単位で有効期限を計算
     exp = datetime.now(timezone.utc) + expires_minutes
     to_encode = {"exp": exp, "sub": subject}
-    encoded_jwt = jwt.encode(to_encode, setting.SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, setting.SECRET_KEY, algorithm=setting.ALGORITHM)
     return encoded_jwt

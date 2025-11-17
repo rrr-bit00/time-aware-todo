@@ -4,7 +4,6 @@ from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 
 from core.config import setting
-from core.security import ALGORITHM
 from db.db_deps import get_db
 from models.users import User
 
@@ -23,7 +22,7 @@ def get_current_user(
     token: str = Depends(oauth2_schemas), db: Session = Depends(get_db)
 ):
     try:
-        payload = jwt.decode(token, setting.SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, setting.SECRET_KEY, algorithms=[setting.ALGORITHM])
         user_id: str = payload.get("sub")
         if user_id is None:
             raise credentials_exception
