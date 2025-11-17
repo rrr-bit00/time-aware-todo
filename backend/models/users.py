@@ -24,10 +24,10 @@ class User(UserBase, table=True):
     create_at: datetime = Field(
         nullable=False,
         sa_type=DateTime(timezone=True),
-        sa_column_kwargs={"onupdate": func.now(), "sever_default": func.now()},
+        sa_column_kwargs={"onupdate": func.now(), "server_default": func.now()},
     )
     update_at: datetime = Field(
         nullable=False,
         sa_type=DateTime(timezone=True),
-        sa_column_kwargs={"onupdate": func.now(), "sever_default": func.now()},
+        sa_column_kwargs={"onupdate": func.now(), "server_default": func.now()},
     )
