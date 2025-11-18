@@ -6,6 +6,8 @@ services:
       dockerfile: "Dockerfile"
     ports:
       - 3001:3000
+      # zedエディタにssh接続するためのportを開放
+      - 2223:22
     volumes:
     # コードの同期
      - ./frontend:/front_app
@@ -19,6 +21,8 @@ services:
       dockerfile: "Dockerfile"
     ports:
       - 8001:8001
+      # zedエディタにssh接続するためのportを開放
+      - 2222:22 
     volumes:
       - ./backend:/back_app
     # rootの.envをbackendコンテナにも渡す
