@@ -4,7 +4,7 @@ from sqlmodel import Field, SQLModel
 
 # Usersテーブルの共通フィールドを定義
 class UserBase(SQLModel):
-    username: str | None = Field(default=None, index=True, max_length=255)
+    username: str | None = Field(default=None, index=True, max_length=50)
     email: EmailStr = Field(unique=True, index=True, max_length=255)
     is_active: bool = Field(default=True)
     is_superuser = False
@@ -39,4 +39,3 @@ class UserUpdateMe(SQLModel):
 class PasswordUpdate(SQLModel):
     current_password: str = Field(min_length=8, max_length=20)
     new_password: str = Field(min_length=8, max_length=20)
-
