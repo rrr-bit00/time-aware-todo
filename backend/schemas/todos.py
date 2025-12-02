@@ -4,7 +4,7 @@ from sqlmodel import DateTime, Field, SQLModel
 
 
 class TodoBase(SQLModel):
-    todo: str = Field(max_length=120)
+    task_name: str = Field(max_length=60)
     is_completed: bool = Field(default=False)
     due_date: datetime | None
 
@@ -18,7 +18,7 @@ class TodoBaseCompleted(TodoBase):
 
 
 class TodoUpdate(SQLModel):
-    todo: str | None = Field(default=None, max_length=120)
+    task_name: str | None = Field(default=None, max_length=60)
     due_date: datetime | None = Field(default=None)
     is_completed: bool | None = Field(default=None)
     completed_at: datetime | None = Field(default=None)
